@@ -1,0 +1,87 @@
+{
+  "name": "boilerplate_mern_stack",
+  "version": "1.0.0",
+  "description": "start-up kit for mern stack",
+  "main": "./bin/www/index.js",
+  "scripts": {
+    "start": "babel-node ./bin/www",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "server": "nodemon ./bin/www --exec babel-node",
+    "client": "webpack-dev-server ---mode development --open",
+    "prestart": "yarn build",
+    "build": "webpack --config webpack.config.js --mode production",
+    "test": " nyc jest --config=jest.json",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "test-ci": "nyc jest --config=jest.json && yarn coverage"
+  },
+  "author": "Akitsuyoshi",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "./node_modules/.bin/eslint --debug --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@babel/core": "7.1.2",
+    "@babel/node": "7.0.0",
+    "axios": "0.18.0",
+    "babel-core": "^7.0.0-bridge",
+    "body-parser": "1.18.3",
+    "cors": "2.8.5",
+    "dotenv": "6.2.0",
+    "express": "4.16.4",
+    "mongoose": "5.4.0",
+    "parse-error": "0.2.0",
+    "react": "16.6.0",
+    "react-dom": "16.6.0",
+    "react-materialize": "2.6.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "7.2.3",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "babel-eslint": "10.0.1",
+    "babel-jest": "23.6.0",
+    "babel-loader": "8.0.4",
+    "babel-polyfill": "6.26.0",
+    "codecov": "3.1.0",
+    "concurrently": "4.0.1",
+    "css-loader": "1.0.1",
+    "eslint": "5.8.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.2",
+    "eslint-plugin-prettier": "3.0.0",
+    "eslint-plugin-react": "7.11.1",
+    "html-loader": "0.5.5",
+    "html-webpack-plugin": "3.2.0",
+    "husky": "1.1.3",
+    "jest": "23.6.0",
+    "lint-staged": "8.0.4",
+    "morgan": "1.9.1",
+    "node-sass": "4.9.4",
+    "nodemon": "1.18.5",
+    "nyc": "13.1.0",
+    "prettier": "1.14.3",
+    "react-hot-loader": "4.3.12",
+    "react-test-renderer": "16.6.0",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.1",
+    "uglifyjs-webpack-plugin": "2.0.1",
+    "webpack": "4.24.0",
+    "webpack-cli": "3.1.2",
+    "webpack-dev-middleware": "3.4.0",
+    "webpack-dev-server": "3.1.10",
+    "webpack-hot-middleware": "2.24.3"
+  },
+  "engines": {
+    "node": ">=11.1",
+    "yarn": ">= 1.9.4"
+  }
+}
