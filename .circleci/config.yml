@@ -29,10 +29,10 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn install
       - run:
           name: Run Docker containers
-          command: yarn build && docker-compose up -d
-      - run: yarn install
+          command: docker-compose up -d
       - save_cache:
           paths:
             - node_modules
