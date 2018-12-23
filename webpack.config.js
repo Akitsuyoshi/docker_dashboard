@@ -2,8 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CONFIG = require('./config');
 
-const isProd = process.env.NODE_ENV === 'production';
 // Helper vars to refer to each file
 const paths = {
   entry: path.resolve(__dirname, 'src', 'client', 'index.js'),
@@ -61,7 +61,7 @@ const webpackConfig = {
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js'],
   },
   performance: {
     hints: 'warning',
@@ -85,13 +85,15 @@ const webpackConfig = {
     port: 8080,
     host: '0.0.0.0',
   },
-  // watchOptions: {
-  //   aggregateTimeout: 300,
-  //   poll: 6000,
-  // },
+  devtool: 'inline-source-map',
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 6000,
+  },
   plugins: [
     new UglifyJsPlugin({
       test: /\.js$/,
+      extractComments: false,
     }),
     new HtmlWebPackPlugin({
       template: paths.src,
@@ -100,7 +102,7 @@ const webpackConfig = {
 };
 
 // dev
-if (!isProd) {
+if (CONFIG.env === 'development') {
   webpackConfig.entry.unshift('webpack/hot/only-dev-server');
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 }

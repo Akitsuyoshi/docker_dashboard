@@ -4,12 +4,12 @@ import mongoose from 'mongoose';
 import { basename } from 'upath';
 import CONFIG from '../../../config';
 
-const models = {};
-
-if (CONFIG.db_host === '') {
+if (!CONFIG.db_host || !CONFIG.db_port || !CONFIG.db_name) {
   console.log('No mongo credentials given');
   return;
 }
+
+const models = {};
 
 fs.readdirSync(__dirname)
   .filter(file => file.indexOf('.' !== 0) && file !== basename && file.slice(-3) === '.js')

@@ -6,15 +6,32 @@ version: 2
 jobs:
   build:
     working_directory: ~/repo
-    docker:
-      - image: circleci/node:10.0.0
-      - image: circleci/mongo:3.6.3
+    machine: true
     steps:
       - checkout
+      - run:
+          name: Setup Nodejs and Yarn
+          command: |
+            # Install Nodejs
+            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+            source ~/.bash_profile
+            nvm install v11.1.0
+            nvm alias default v11.1.0
+
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo "[ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"" >> $BASH_ENV
+
+            # Install Yarn
+            npm install -g yarn@1.9.4
+      - run:
+          name: Setup dockerize
+          command: bash .circleci/setup-dockerize.sh
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+      - run:
+          name: Run Docker containers
+          command: yarn build && docker-compose up -d
       - run: yarn install
       - save_cache:
           paths:

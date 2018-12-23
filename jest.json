@@ -1,6 +1,22 @@
 {
   "verbose": true,
-  "bail": true,      
-  "testMatch": ["<rootDir>/src/tests/suites/*.js"],
-  "setupFiles": ["<rootDir>/src/tests/bootstrap.js"]
+  "bail": true,
+  "setupFiles": ["<rootDir>/__tests__/bootstrap.js"],
+  "textMatch": "<rootDir>/__tests__/**/?(*.)+(spec|test).js?(x)",
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/bin/",
+    "/config/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 90,
+      "functions": 90,
+      "lines": 90,
+      "statements": 90
+    }
+  },
+  "coverageDirectory": "./coverage/",
+  "collectCoverage": true,
+  "rootDir": "src/"
  }
