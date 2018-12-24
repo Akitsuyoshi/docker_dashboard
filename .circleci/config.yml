@@ -6,7 +6,8 @@ version: 2
 jobs:
   build:
     working_directory: ~/repo
-    machine: true
+    machine: 
+        image: circleci/classic:edge
     steps:
       - checkout
       - run:
@@ -24,22 +25,14 @@ jobs:
             # Install Yarn
             npm install -g yarn@1.9.4
       - run:
-          name: Setup dockerize
-          command: bash .circleci/setup-dockerize.sh
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn install
-      - run:
-          name: Run Docker containers
+          name: docker-compose up
           command: docker-compose up -d
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
       - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:27018 -timeout 1m
+          name: sleep for waiting launch db
+          command: sleep 2
+      - run:
+          name: Enter node.js container
+          command: docker-compose exec node sh
       - run:
           name: Test
           command: |
