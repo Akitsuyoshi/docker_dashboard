@@ -6,8 +6,9 @@ version: 2
 jobs:
   build:
     working_directory: ~/repo
+    machine: true
     machine: 
-        image: circleci/classic:edge
+        image: circleci/classic:201808-01
     steps:
       - checkout
       - run:

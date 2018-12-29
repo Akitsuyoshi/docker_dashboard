@@ -1,7 +1,7 @@
 import cluster from 'cluster';
 import CPUs from 'os';
 import http from 'http';
-import app from '../../src/server';
+import app from '../../server';
 import CONFIG from '../../config';
 
 const { port, env } = CONFIG;
