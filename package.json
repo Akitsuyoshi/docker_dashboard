@@ -1,19 +1,19 @@
 {
-  "name": "boilerplate_mern_stack",
+  "name": "docker_dashboard",
   "version": "1.0.0",
-  "description": "start-up kit for mern stack",
+  "description": "docker visualization",
   "main": "./bin/www/index.js",
   "scripts": {
-    "start": "babel-node ./bin/www",
+    "start": "NODE_ENV=production babel-node ./bin/www",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "server": "nodemon ./bin/www --exec babel-node",
     "client": "webpack-dev-server ---mode development --open",
-    "build": "webpack --config webpack.config.js --mode production",
-    "test": " jest --config=jest.json --watchAll --coverage",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "test": " jest --watchAll --coverage",
     "coverage": "jest --forceExit --coverage --coverageReporters=\"text-lcov\" > coverage.lcov",
-    "test-ci": "jest --config=jest.json && yarn coverage"
+    "test-ci": "jest && yarn coverage"
   },
-  "author": "Akitsuyoshi",
+  "author": "Akitsuyoshi:ka090824@gmail.com",
   "license": "ISC",
   "husky": {
     "hooks": {
@@ -26,20 +26,37 @@
       "git add"
     ]
   },
+  "engines": {
+    "node": ">=11.1",
+    "yarn": ">= 1.9.4"
+  },
   "dependencies": {
     "@babel/core": "7.1.2",
     "@babel/node": "7.0.0",
+    "auth0-js": "9.8.2",
     "axios": "0.18.0",
     "babel-core": "^7.0.0-bridge",
     "body-parser": "1.18.3",
     "cors": "2.8.5",
     "dotenv": "6.2.0",
+    "enzyme-adapter-react-16": "1.7.1",
     "express": "4.16.4",
+    "express-graphql": "0.7.1",
+    "graphql": "14.0.2",
     "mongoose": "5.4.0",
     "parse-error": "0.2.0",
+    "prop-types": "15.6.2",
     "react": "16.6.0",
     "react-dom": "16.6.0",
-    "react-materialize": "2.6.0"
+    "react-materialize": "2.6.0",
+    "react-redux": "6.0.0",
+    "react-router": "4.3.1",
+    "react-router-dom": "4.3.1",
+    "redux": "4.0.1",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.3.0",
+    "socket.io": "2.2.0",
+    "socket.io-client": "2.2.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.2.3",
@@ -52,6 +69,7 @@
     "codecov": "3.1.0",
     "concurrently": "4.0.1",
     "css-loader": "1.0.1",
+    "enzyme": "3.8.0",
     "eslint": "5.8.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "2.14.0",
@@ -67,8 +85,9 @@
     "node-sass": "4.9.4",
     "nodemon": "1.18.8",
     "prettier": "1.14.3",
+    "react-addons-test-utils": "15.6.2",
     "react-hot-loader": "4.3.12",
-    "react-test-renderer": "16.6.0",
+    "react-test-renderer": "16.7.0",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
     "uglifyjs-webpack-plugin": "2.0.1",
@@ -77,9 +96,5 @@
     "webpack-dev-middleware": "3.4.0",
     "webpack-dev-server": "3.1.10",
     "webpack-hot-middleware": "2.24.3"
-  },
-  "engines": {
-    "node": ">=11.1",
-    "yarn": ">= 1.9.4"
   }
 }

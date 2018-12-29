@@ -13,9 +13,13 @@ FROM base as development
 ENV NODE_ENV=development
 COPY package.json yarn.lock ./
 RUN yarn --pure-lockfile
-COPY .babelrc webpack.config.js nodemon.json ./
-COPY src ./src
+
+COPY .babelrc webpack.config.js nodemon.json jest.config.js ./
+COPY client ./client
+COPY server ./server
 COPY bin ./bin
+COPY config ./config
+
 CMD ["yarn", "dev"]
 
 # For production build

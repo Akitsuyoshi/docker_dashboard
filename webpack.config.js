@@ -6,15 +6,15 @@ const CONFIG = require('./config');
 
 // Helper vars to refer to each file
 const paths = {
-  entry: path.resolve(__dirname, 'src', 'client', 'index.js'),
-  src: path.resolve(__dirname, 'src', 'client', 'index.html'),
+  entry: path.resolve(__dirname, 'client', 'index.js'),
+  src: path.resolve(__dirname, 'client', 'index.html'),
   dest: path.resolve(__dirname, 'public'),
-  destHtml: path.resolve(__dirname, 'public', 'index.html'),
   contentBase: path.join(__dirname, 'public'),
 };
 
 const webpackConfig = {
   entry: ['babel-polyfill', paths.entry],
+  mode: CONFIG.env,
   output: {
     filename: 'bundle.js',
     path: paths.dest,
@@ -96,6 +96,7 @@ const webpackConfig = {
       extractComments: false,
     }),
     new HtmlWebPackPlugin({
+      entry: paths.src,
       template: paths.src,
     }),
   ],

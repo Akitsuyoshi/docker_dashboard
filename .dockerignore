@@ -12,6 +12,6 @@ public
 .circleci
 .eslint*
 .prettierrc
-jest.json
 coverage
+coverage.lcov
 
