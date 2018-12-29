@@ -85,7 +85,7 @@ const webpackConfig = {
     port: 8080,
     host: '0.0.0.0',
   },
-  devtool: 'inline-source-map',
+  devtool: CONFIG.env === 'development' ? 'inline-source-map' : false,
   watchOptions: {
     aggregateTimeout: 300,
     poll: 6000,
