@@ -82,7 +82,7 @@
     "jest": "23.6.0",
     "lint-staged": "8.0.4",
     "morgan": "1.9.1",
-    "node-sass": "4.9.4",
+    "node-sass": "4.13.1",
     "nodemon": "1.18.8",
     "prettier": "1.14.3",
     "react-addons-test-utils": "15.6.2",
