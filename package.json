@@ -34,7 +34,7 @@
     "@babel/core": "7.1.2",
     "@babel/node": "7.0.0",
     "auth0-js": "9.8.2",
-    "axios": "0.18.0",
+    "axios": "0.21.1",
     "babel-core": "^7.0.0-bridge",
     "body-parser": "1.18.3",
     "cors": "2.8.5",
